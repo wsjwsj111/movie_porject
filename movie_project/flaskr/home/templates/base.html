@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微电影</title>
+
+    <script src="{{ url_for('static', filename='jquery-3.3.1.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="//at.alicdn.com/t/font_815678_3sur84hp6jp.css">
+
+    {% block head %}
+
+    {% endblock %}
+
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .head{
+            width: 100%;
+            height: 45px;
+            color: black;
+            line-height: 45px;
+            position: fixed;
+            border: #adadad solid 1px;
+            box-shadow: 2px 4px 6px #868686 ;
+            padding-bottom: 5px;
+            padding-top: 5px
+        }
+        .body{
+            position: fixed;
+            top:60px;
+            right: 0;
+            left: 15%;
+            bottom: 0;
+            overflow: auto;
+        }
+        a{
+            text-decoration: none;
+            color: #5d5d5d;
+            font-size: 13px;
+        }
+        li{
+            float: left;
+            {#position: relative;#}
+            cursor: pointer;
+        }
+        .head_form{
+            box-sizing: border-box;
+            border: 0;
+        }
+        #form_input{
+            height: 30px;
+            width: 170px;
+            margin-left: 100px;
+            vertical-align: center;
+            border: darkgrey solid 1px
+        }
+        #button{
+            height: 30px;
+            width: 60px;
+            vertical-align: center;
+
+        }
+        {% block style %}
+
+        {% endblock %}
+    </style>
+
+</head>
+<body>
+
+
+<div class="head">
+    <div class="top_div1" style="float: left">
+        <ul class="top_ul" style="list-style: none">
+            <li class="top_li" style="margin-left: 230px">
+                <i id="iconfont" class="iconfont icon-movie" style="font-size: 26px"></i>
+                <b><a  style="display: inline-block;font-size: 24px;color: #616161;"href="#">微电影</a></b>
+            </li>
+        </ul>
+    </div>
+    <div class="top_div2" style="float: left;width: 500px;">
+        <form class="top_form" style="width:90%;display: inline-block">
+            <div>
+                <input class="head_form" id="form_input" type="text" value=" 请输入电影名！"><button class="head_form" type="submit" id="button" style="cursor: pointer">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <a type="submit" value="搜索" > &nbsp;搜索</a></button>
+            </div>
+        </form>
+    </div>
+    <div class="top_div3" >
+        <ul class="top_ul2" style="list-style: none">
+            <li class="top_li" style="margin-left: 50px">
+                <a href="/index"><i class="fa fa-film" aria-hidden="true"></i></a>
+                <span><b><a style="display: inline-block" href="/index">电影</a></b></span>
+            </li>
+            <li class="top_li" style="margin-left: 30px">
+                <a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i></a>
+                <span><b><a style="display: inline-block" href="/login">登录</a></b></span>
+            </li>
+            <li class="top_li" style="margin-left: 30px">
+                <a href="/register" ><i class="fa fa-plus" aria-hidden="true" ></i></a>
+                <span><b><a style="display: inline-block" href="/register" >注册</a></b></span>
+            </li>
+            <li class="top_li" style="margin-left: 30px">
+                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                <span><b><a style="display: inline-block" href="/logout">退出</a></b></span>
+            </li>
+            <li class="top_li" style="margin-left: 30px">
+                <a href="/user"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <span><b><a style="display: inline-block" href="/user">会员</a></b></span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<div class="body">
+    {% block body %}
+
+    {% endblock %}
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        //each遍历文本框
+    $(".head_form").each(function() {
+        //保存当前文本框的值
+        var vdefault = this.value;
+        $(this).focus(function() {
+             //获得焦点时，如果值为默认值，则设置为空
+            if (this.value == vdefault) {
+                this.value = "";
+            }
+        });
+        $(this).blur(function() {
+             //失去焦点时，如果值为空，则设置为默认值
+            if (this.value == "") {
+                this.value = vdefault;
+            }
+        });
+     });
+ });
+    {% block js %}
+
+    {% endblock %}
+
+</script>
+
+</body>
+</html>

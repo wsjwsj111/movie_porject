@@ -1,0 +1,173 @@
+{% extends 'newbase.html' %}
+{% block head %}
+    <title>register</title>
+
+{% endblock %}
+
+
+{% block style %}
+    .regist_form{
+            width: 400px;
+            height: 490px;
+            margin-left: 455px;
+            margin-top: 100px;
+            border: solid #277aff 1px;
+            margin-bottom:7px;
+        }
+        .registformtitle{
+            width: 398px;
+            height: 35px;
+            line-height: 35px;
+            background-color:#B8FFCD ;
+            color: 	#006030;
+        }
+        .rform_content{
+            margin: 5px 15px;
+        }
+        .rForm_item{
+            width: 380px;
+            height: 30px;
+            font-size: 14px;
+            color: #4A4A4A;
+
+        }
+        .icon_rForm , .regist_word, #icon_rForm{
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            font-family: Microsoft Yahei;
+
+        }
+
+        .r_inputbox{
+            background-color: white;
+            width: 360px;
+            height: 32px;
+            line-height: 35px;
+            border:solid gray 1px;
+        }
+        .r_submitbox{
+            background-color: #29a151;
+            color: white;
+            width: 360px;
+            height: 40px;
+            line-height: 35px;
+            border:solid gray 1px;
+            margin-top: 15px;
+            font-size: 16px;
+        }
+        .icon_rForm{
+            font-size: 14px;
+            color: #4A4A4A;
+        }
+{% endblock %}
+
+
+{% block body %}
+
+     <div class="regist_form">
+        <div class="registformtitle">
+            <div class="rform_prompt">&nbsp;
+                <i class="fa fa-plus" aria-hidden="true" style="margin-left: 10px;"></i>&nbsp;
+                <span class="regist_word">会员注册</span>
+            </div>
+        </div>
+
+        <div class="rform_content">
+            <form method="POST" action="/register">
+
+{#            #用户名#}
+                <div class="rForm_item">
+                    <span class="icon_rForm" id="icon_username"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;
+                    <span class="regist_word" id="username">{{ rForm.username.label }}</span>
+                    {% for error in rForm.username.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}</span>
+                </div>
+                <div>
+                    {{ rForm.username(class='r_inputbox',id="rForm_username_input") }}
+                </div>
+
+{#            #密码#}
+                <div class="rForm_item">
+                    <span class="icon_rForm" id="icon_pwd"><i class="fa fa-lock" aria-hidden="true"></i></span>&nbsp;
+                    <span class="regist_word" id="pwd">{{ rForm.pwd.label }}</span>
+                    {% for error in rForm.pwd.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="rform_input">
+                    {{ rForm.pwd(class='r_inputbox',id="rForm_pwd_input") }}
+                </div>
+
+{#            #昵称#}
+                <div class="rForm_item">
+                    <span class="icon_rForm" id="icon_name"><i class="fa fa-user" aria-hidden="true"></i></span>&nbsp;
+                    <span class="regist_word" id="pwd">{{ rForm.name.label }}</span>
+                    {% for error in rForm.name.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="rform_input">
+                    {{ rForm.name(class='r_inputbox',id="rForm_name_input") }}
+                </div>
+
+{#            #邮箱#}
+                <div class="rForm_item">
+                    <span class="icon_rForm" id="icon_email"><i class="fa fa-envelope" aria-hidden="true" style="font-size: 13px"></i></span>&nbsp;
+                    <span class="regist_word" id="email">{{ rForm.email.label }}</span>
+                    {% for error in rForm.email.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="rform_input">
+                    {{ rForm.email(class='r_inputbox',id="rForm_email_input") }}
+                </div>
+
+{#            #电话#}
+                <div class="rForm_item">
+                    <span class="icon_rForm" id="icon_phone"><i class ="fa fa-mobile" aria-hidden="true" style="font-size: 20px"></i></span>&nbsp;
+                    <span class="regist_word" id="phone">{{ rForm.phone.label }}</span>
+                    {% for error in rForm.phone.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="rform_input">
+                    {{ rForm.phone(class='r_inputbox',id="rForm_phone_input") }}
+                </div>
+
+{#            #确认密码#}
+                <div class="rForm_item">
+                    <span class="icon_rForm" id="icon_pwd"><i class="fa fa-lock" aria-hidden="true"></i></span>&nbsp;
+                    <span class="regist_word" id="pwdagain">{{ rForm.pwdagain.label }}</span>
+                    {% for error in rForm.pwdagain.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="rform_input">
+                    {{ rForm.pwdagain(class='r_inputbox',id="rForm_pwdagain_input") }}
+                </div>
+
+
+                <div>
+                    {{ rForm.submit(class="r_submitbox") }}
+                </div>
+            {{ rForm.csrf_token }}
+
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+
+ {% block js %}
+
+ {% endblock %}
+
+

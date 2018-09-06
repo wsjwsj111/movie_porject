@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>register</title>
+
+{% endblock %}
+
+
+{% block style %}
+    .registerbox{
+            width: 420px;
+            height: 450px;
+{#            left: 35%;#}
+            margin-top: 50px;
+            margin-left: 280px;
+            top: 20%;
+            background: white;
+            border: #277aff solid 1px;
+{#            z-index:-20px#}
+{#            position: absolute;#}
+{#            position: fixed;#}
+{#            position:relative;#}
+{#            index-z:-100px#}
+{#            overflow: auto;#}
+        }
+    .bar{
+            background: #B8FFCD;
+            height: 35px;
+            width: 100%;
+            line-height: 35px;
+            text-align: left
+        }
+    form{
+            margin-left: 5%;
+            margin-top: 8px;
+            line-height: 25px;
+        }
+    .input-text{
+        width: 90%;
+        height: 20px;
+        color: #818181;
+        margin-bottom:3px
+        outline:none
+        border-radius:-1px
+    }
+    .form_span{
+        font-size: 14px;
+        color: #4A4A4A;
+    }
+    .re_err{
+        color:red;
+    }
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="registerbox">
+         <div class="bar">
+            <i class="fa fa-plus" aria-hidden="true" style="color: #33a93d;margin-left: 20px"></i>
+            <span style="margin-left: 5px"> 会员注册</span>
+        </div>
+        <form action="/register" method="post">
+            <span class="form_span">&nbsp;<i class="fa fa-user" aria-hidden="true"></i>&nbsp;用户名<i class="re_err" id="user_id"></i></span><br/>
+            <input class="input-text" id="user_input" type="text" name="username" value placeholder=" 用户名"><br/>
+            <span class="form_span">&nbsp;<i class="fa fa-lock" aria-hidden="true"></i>&nbsp;密码<i class="re_err" id="pwd_id"></i></span><br/>
+            <input class="input-text"  id="pwd_input" type="password" name="pwd" value placeholder=" 密码"><br/>
+            <span class="form_span">&nbsp;<i class="fa fa-user" aria-hidden="true"></i>&nbsp;昵称<i class="re_err" id="name_id"></i></span><br/>
+            <input class="input-text" id="name_input" type="text" name="name" value placeholder=" 昵称"><br/>
+            <span class="form_span">&nbsp;<i class="fa fa-envelope" aria-hidden="true" style="font-size: 13px"></i></i>&nbsp;邮箱<i class="re_err" id="email_id"></i></span><br/>
+            <input class="input-text"  id="email_input" type="text" name="email" value placeholder=" 邮箱"><br/>
+            <span class="form_span">&nbsp;<i class="fa fa-mobile" aria-hidden="true" style="font-size: 20px"></i></i>&nbsp;手机<i class="re_err" id="phone_id"></i></span><br/>
+            <input class="input-text" id="phone_input" type="text" name="phone" value placeholder=" 手机"><br/>
+            <span class="form_span">&nbsp;<i class="fa fa-lock" aria-hidden="true"></i>&nbsp;确认密码<i class="re_err" id="pwdagain_id">{{ info }}</i></span><br/>
+            <input class="input-text"  id="pwdagain_input" type="password" name="pwdagain" value placeholder=" 确认密码"><br/>
+            <input id="submit" type="submit" value="注册" style="height: 35px;width: 95%;margin-top: 10px;background-color: #76cd34">
+        </form>
+    </div>
+
+{% endblock %}
+
+ {% block js %}
+    $(function(){
+            $("input[name='username']").blur(function(){
+                //blur从链接上移开焦点(鼠标离开框时)
+                var usrname=this.value;
+                console.log(usrname)
+                var patt=/^[a-z_]\w{3,19}$/i
+                if(usrname.search(patt) < 0){
+                    $("#user_id").text("用户名由4-20位字母/数字/下划线组成,数字不能开头");
+                }
+            });
+            $("input[name='pwd']").blur(function(){
+                //blur从链接上移开焦点(鼠标离开框时)
+                var pwd=this.value;
+                console.log(pwd)
+                var patt1=/^\S{6,16}$/
+                if(pwd.search(patt1) < 0){
+                    $("#pwd_id").text('密码为6-16位有效字符（非空白字符）')
+                }
+            });
+            $("input[name='name']").blur(function(){
+                //blur从链接上移开焦点(鼠标离开框时)
+                var name=this.value;
+                console.log(name)
+                var patt2=/^[a-z_]\w{3,19}$/i
+                if(name.search(patt2) < 0){
+                    $("#name_id").text('用户名由4-20位字母/数字/下划线组成,数字不能开头')
+                }
+            });
+            $("input[name='email']").blur(function(){
+                //blur从链接上移开焦点(鼠标离开框时)
+                var email=this.value;
+                console.log(email)
+                var patt4=/.*\[@\].*/
+                if(email.search(patt4) < 0){
+                    $("#email_id").text('含有@的邮箱,且@在字符串的中间')
+                }
+            });
+            $("input[name='phone']").blur(function(){
+                //blur从链接上移开焦点(鼠标离开框时)
+                var phone=this.value;
+                console.log(phone)
+                var patt3=/^1[3578]\d{9}$/
+                if(phone.search(patt3) < 0){
+                    $("#phone_id").text('手机号由11位数字组成')
+                }
+            });
+{#            $("input[name='pwdagain']").blur(function(){#}
+{#                //blur从链接上移开焦点(鼠标离开框时)#}
+{#                var pwdagain=this.value;#}
+{#                console.log(pwdagain)#}
+{#                var patt4=/^\S{6,16}$/#}
+{#                if(pwdagain.search(patt4) < 0 || pwdagain ！=pwd){#}
+{#                    $("#pwd_id").text('两次密码不一致，请重新输入')#}
+{#                }#}
+{#            });#}
+        });
+
+ {% endblock %}
+
+
