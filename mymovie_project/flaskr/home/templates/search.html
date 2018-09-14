@@ -1,0 +1,46 @@
+{% extends 'newbase.html' %}
+{% block head %}
+    <title>search</title>
+
+{% endblock %}
+
+
+{% block style %}
+
+{% endblock %}
+
+
+{% block body %}
+    <!--内容-->
+<div class="container" style="margin-top:76px">
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb" style="margin-top:6px;">
+                <li>与"xxx"有关的电影，共x部</li>
+            </ol>
+        </div>
+        <div class="col-md-12">
+            <div class="media">
+                <div class="media-left">
+                    <a href="/playvideo">
+                        <img class="media-object" src="../static/main_banner/{{ nameinfo.logo }}" style="width: 50px;height: 50px" alt="{{ nameinfo.title}}">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{ nameinfo.title}}<a href="/playvideo" class="label label-primary pull-right"><span class="glyphicon glyphicon-play"></span>播放影片</a></h4>
+                    {{ nameinfo.info }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block js %}
+
+
+{% endblock %}

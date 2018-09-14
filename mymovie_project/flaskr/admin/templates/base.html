@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微电影管理系统</title>
+    <script src="{{ url_for('static', filename='jquery-3.3.1.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='font-awesome-4.7.0/css/font-awesome.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="//at.alicdn.com/t/font_815678_3sur84hp6jp.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .menuitem{
+            color: #687374;
+            float: right;
+            cursor: pointer;
+            height: 50px;
+        }
+        .menuitem1{
+            color: #687374;
+            float: right;
+            cursor: pointer;
+            height: 50px;
+            line-height: 50px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        <!--小屏幕导航按钮和logo-->
+        <div class="navbar-header" style="background-color: #008ab4;width:22%;height: 50px;float: left">
+            <a href="/index" class="navbar-brander" style="width:250px;font-size: 25px;text-decoration: none;line-height: 48px">
+                <sapn class="iconfont icon-movie" style="font-size: 35px;margin-left: 30px;color: black"></sapn>
+                <span style="color: white">微电影管理系统</span>
+            </a>
+        </div>
+
+        <div class="navbar-header" style="background-color: #00ade1;width:78%;height: 50px;float: left">
+            <a style="width: 10%"><span class="glyphicon glyphicon-menu-hamburger" style="margin-left: 10px;font-size: 20px;line-height: 50px;color: white"></span></a>
+            <div class="navbar-coustom-menu" style="float: right">
+                <ul style="list-style: none;margin-right: 50px;width: 90%">
+                    <li class="menuitem1">XXX</li>
+                    <li id="img" class="menuitem" >
+                        <img style="width: 30px;height: 30px;border-radius: 50%;margin: 10px 15px 10px;" src="../static/main_banner/龙哥.png" >
+                        <span>
+                            <div style="position: absolute;background-color:#eeeeee;top: 50px"></div>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--小屏幕导航按钮和logo-->
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image" style="margin-top: 10px;margin-left: 10px">
+                    <img src="../static/main_banner/龙哥.png" class="img-circle" alt="User Image" style="width: 50px;height: 50px;">
+                </div>
+                <div class="pull-left info" style="margin-top: 10px;margin-left: 10px">
+                    <p>用户xxx</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+                </div>
+            </div>
+
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="搜索...">
+                    <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
+                                class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </form>
+
+        </section>
+    </aside>
+
+</div>
+
+
+</body>
+
+
+</html>

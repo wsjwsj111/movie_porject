@@ -1,0 +1,312 @@
+{% extends 'newbase.html' %}
+{% block head %}
+    <title>playvideo</title>
+    <script src="../../static/jwplayer/jwplayer.js"></script>
+    <script type="text/javascript">jwplayer.key="YbfZZ4wMZfXIEBNNSswe5PKx8wKVLUN4";</script>
+    <link rel="stylesheet" type="text/css" href="../../static/jwplayer/skins/stormtrooper.css">
+    <script type="text/javascript" src="../../static/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../../static/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="../../static/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+{% endblock %}
+
+
+{% block style %}
+
+    body{
+        margin-top:76px;
+    }
+{% endblock %}
+
+
+
+
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8" >
+            <div id="moviecontainer">Loading the player ...</div>
+        </div>
+
+        <div class="col-md-4" >
+            <div class="panel panel-info" style="height:500px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title" ><span class="glyphicon glyphicon-facetime-video">&nbsp;电影介绍</span></h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <td style="width:33%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-film"></span>&nbsp;片名
+                            </td>
+                            <td>{{ movieinfo.title }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-tag"></span>&nbsp;标签
+                            </td>
+                            <td>{{ movieinfo.newtag }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-time"></span>&nbsp;片长
+                            </td>
+                            <td>{{ movieinfo.length }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-map-marker"></span>&nbsp;地区
+                            </td>
+                            <td>{{ movieinfo.area }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-star"></span>&nbsp;星级
+                            </td>
+                            <td>
+                                <span class="glyphicon glyphicon-star" style="color:#FFD119"></span>
+                                <span class="glyphicon glyphicon-star" style="color:#FFD119"></span>
+                                <span class="glyphicon glyphicon-star" style="color:#FFD119"></span>
+                                <span class="glyphicon glyphicon-star-empty" style="color:#FFD119"></span>
+                                <span class="glyphicon glyphicon-star-empty" style="color:#FFD119"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-time"></span>&nbsp;上映时间
+                            </td>
+                            <td>{{ movieinfo.release_time }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-play"></span>&nbsp;播放数量
+                            </td>
+                            <td>{{ movieinfo.playnum }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-comment"></span>&nbsp;评论数量
+                            </td>
+                            <td>{{ movieinfo.commentnum }}</td>
+                        </tr>
+                        <tr>
+                            <td style="width:30%;color:#ccc;font-weight:bold;font-style:italic;">
+                                <span class="glyphicon glyphicon-info-sign"></span>&nbsp;影片介绍
+                            </td>
+                            <td>{{ movieinfo.info }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div  style="margin-top: 1%">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-comment">&nbsp;电影评论</span></h3>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>请先<a href="/login" >登录</a>,才可参与评论!</strong>
+                </div>
+
+                <ol class="breadcrumb" style="margin-top: 6px">
+                    <li>全部评论（5）</li>
+                </ol>
+
+                <form role="form" style="margin-bottom:6px;" method="post" action="/playvideo">
+                    <div class="form-group">
+                        <div>
+                            <label for="input_content">内容</label>
+
+                        </div>
+                        <div>
+                            <textarea id="input_content" name="comment"></textarea>
+                        </div>
+
+                        <div class="col-xs-12" id="error_content"></div>
+                    </div>
+                    <a class="btn btn-success" id="btn-sub"><span class="glyphicon glyphicon-edit"></span>&nbsp;提交评论</a>
+                    &nbsp;
+                    <a class="btn btn-danger" id="btn-col"><span class="glyphicon glyphicon-heart"></span>&nbsp;收藏电影</a>
+                </form>
+                <ul class="commentList" style="margin-top: 10px">
+                        <li class="item cl">
+                            <a href="/user">
+                                <i class="avatar size-L radius">
+                                    <img alt="50x50" src="holder.js/50x50" class="img-circle" style="border:1px solid #abcdef;">
+                                </i>
+                            </a>
+                            <div class="comment-main">
+                                <header class="comment-header">
+                                    <div class="comment-meta">
+                                        <a class="comment-author" href="/user">xiaoli</a>
+                                        评论于
+                                        <time title="2016-12-07 09:12:51" datetime="2016-12-07 09:12:51">2017-03-01 09:12:51</time>
+                                    </div>
+                                </header>
+                                <div class="comment-body">
+                                    <p>这电影真好看！</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item cl">
+                            <a href="/user">
+                                <i class="avatar size-L radius">
+                                    <img alt="50x50" src="holder.js/50x50" class="img-circle" style="border:1px solid #abcdef;">
+                                </i>
+                            </a>
+                            <div class="comment-main">
+                                <header class="comment-header">
+                                    <div class="comment-meta">
+                                        <a class="comment-author" href="/user">xiaoli</a>
+                                        评论于
+                                        <time title="2016-12-07 09:12:51" datetime="2016-12-07 09:12:51">2017-03-01 09:12:51</time>
+                                    </div>
+                                </header>
+                                <div class="comment-body">
+                                    <p>这电影真好看！</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item cl">
+                            <a href="/user">
+                                <i class="avatar size-L radius">
+                                    <img alt="50x50" src="holder.js/50x50" class="img-circle" style="border:1px solid #abcdef;">
+                                </i>
+                            </a>
+                            <div class="comment-main">
+                                <header class="comment-header">
+                                    <div class="comment-meta">
+                                        <a class="comment-author" href="/user">xiaoli</a>
+                                        评论于
+                                        <time title="2016-12-07 09:12:51" datetime="2016-12-07 09:12:51">2017-03-01 09:12:51</time>
+                                    </div>
+                                </header>
+                                <div class="comment-body">
+                                    <p>这电影真好看！</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item cl">
+                            <a href="/user">
+                                <i class="avatar size-L radius">
+                                    <img alt="50x50" src="holder.js/50x50" class="img-circle" style="border:1px solid #abcdef;">
+                                </i>
+                            </a>
+                            <div class="comment-main">
+                                <header class="comment-header">
+                                    <div class="comment-meta">
+                                        <a class="comment-author" href="/user">xiaoli</a>
+                                        评论于
+                                        <time title="2016-12-07 09:12:51" datetime="2016-12-07 09:12:51">2017-03-01 09:12:51</time>
+                                    </div>
+                                </header>
+                                <div class="comment-body">
+                                    <p>这电影真好看！</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="item cl">
+                            <a href="/user">
+                                <i class="avatar size-L radius">
+                                    <img alt="50x50" src="holder.js/50x50" class="img-circle" style="border:1px solid #abcdef;">
+                                </i>
+                            </a>
+                            <div class="comment-main">
+                                <header class="comment-header">
+                                    <div class="comment-meta">
+                                        <a class="comment-author" href="/user">xiaoli</a>
+                                        评论于
+                                        <time title="2016-12-07 09:12:51" datetime="2016-12-07 09:12:51">2017-03-01 09:12:51</time>
+                                    </div>
+                                </header>
+                                <div class="comment-body">
+                                    <p>这电影真好看！</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="col-md-12 text-center">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                <li>
+                                    <a href="#" aria-label="First">
+                                        <span aria-hidden="true">首页</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" aria-label="Previous">
+                                        <span aria-hidden="true">上一页</span>
+                                    </a>
+                                </li>
+                                <li><a href="#">1&nbsp;/&nbsp;10</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        <span aria-hidden="true">下一页</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" aria-label="Last">
+                                        <span aria-hidden="true">尾页</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--内容-->
+
+
+<script src="../../static/lazyload/jquery.lazyload.min.js"></script>
+{#<script src="//cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>#}
+<!--播放页面-->
+
+
+{#    内容框中的表情等#}
+<script src="../../static/jwplayer/jwplayer.js"></script>
+<script>
+var ue = UE.getEditor('input_content', {
+    toolbars: [
+        ['fullscreen', 'emotion', 'preview', 'link']
+    ],
+    initialFrameWidth: "100%",
+    initialFrameHeight: "100",
+})
+</script>
+
+
+{#            </div>#}
+{##}
+{##}
+{#        </div>#}
+{#</div>#}
+{##}
+{##}
+{##}
+{% endblock %}
+
+
+
+
+
+{% block js %}
+
+     jwplayer("moviecontainer").setup({
+                          flashplayer: "../static/jwplayer/jwplayer.flash.swf",
+                          file: "../static/video/{{ movieinfo.url }}",
+                          height: 500,
+                          width: 774
+      });
+{% endblock %}

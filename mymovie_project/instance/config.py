@@ -1,0 +1,6 @@
+SECRET_KEY = "WWW  ERTYUIOFG"
+
+
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:wsj111@localhost:3306/test1'
+
+SQLALCHEMY_TRACK_MODIFICATIONS = True
